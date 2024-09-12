@@ -11,6 +11,10 @@ paths:
       responses:
         '200':
           description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserListResponse'
         '404':
           description: User not found
           content:
@@ -61,6 +65,16 @@ components:
           type: integer
         message:
           type: string
+    UserListResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'  # Reference the "Item" schema
+        totalCount:
+          type: integer
+          example: 10
 
 
 
