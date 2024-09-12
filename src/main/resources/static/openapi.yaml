@@ -1,0 +1,66 @@
+openapi: 3.0.1
+info:
+  title: My API
+  version: 1.0.0
+paths:
+  /users:
+    get:
+      tags:
+        - User Module
+      summary: Get all users
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /getUser/{id}:
+    get:
+      tags:
+        - User Module
+      summary: Get user by id
+      operationId: getUserById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the user to retrieve
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A single user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+
+
+
